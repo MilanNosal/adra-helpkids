@@ -1,5 +1,3 @@
-# adra-helpkids
-
 ## Názov
 
 HELPKIDS
