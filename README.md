@@ -13,6 +13,8 @@ platbou 12–60 € mesačne hradí dieťaťu školu, stravu a niekedy aj intern
 alebo pochádzajú z rodín, ktoré na školu nemajú — z utečeneckého tábora Kyaka II, kde žije
 120 000 ľudí, a zo slumov na predmestí Kampaly. Nie je to anonymná zbierka, ale dlhodobý
 vzťah jeden na jedného, ktorý treba roky obsluhovať vysvedčeniami, fotkami a vyúčtovaním.
+Nie je to cvičná úloha: za každým záznamom je konkrétne dieťa, ktoré bez podpory nechodí do
+školy, a reálne peniaze, ktoré musia doputovať na správny účet v správnom trimestri.
 
 Dnes to celé beží ručne. Škola v Ugande pozbiera údaje o dieťati od rodičov, napíše ich do
 voľného dokumentu, nafotí deti a pošle to cez WhatsApp. V ADRA to niekto prečíta, doplní
@@ -26,7 +28,9 @@ drží iba v hlave zamestnanca ADRA.
 Systém umožní škole zadať podklady priamo do systému,
 pracovník ADRA ich schváli a redakčne upraví — a z databázy sa potom vygeneruje všetko ostatné:
 profil dieťaťa na zverejnenie, tri typy zmlúv v PDF, prehľady platieb po trimestroch a darcovský
-pohľad na „svoje“ dieťa. Systém by mal umožniť import aktuálnych dát z ADRA excelov. Momentálne
+pohľad na „svoje“ dieťa. Darca dostane prístup do systému, kde po trimestroch sleduje výsledky
+dieťaťa — vysvedčenia, hodnotenia a priebežné fotky — a vlastné platby; dnes to chodí ad hoc
+emailom. Systém by mal umožniť import aktuálnych dát z ADRA excelov. Momentálne
 je počet zapojených detí a škôl obmedzený časom zamestnanca, cieľom systému je umožniť násobný
 nárast kapacity organizácie a sprístupniť tak vyššiu kvalitu života čo najviac deťom.
 
