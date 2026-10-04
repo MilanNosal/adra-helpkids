@@ -22,8 +22,9 @@ Partnerské školy a programy (verejný cenník, mesačne na dieťa):
 | Treasure Junior School (Kampala) | školné + strava | 35 € |
 | Treasure Junior School | internát + školné a strava | 60 € |
 
-Interne sa ale počíta **na trimester** (4 mesiace) — to je aj minimálna dĺžka podpory a
-zároveň účtovný a školský takt celého programu. Mesačná suma na webe je len odvodené číslo.
+Voči škole sa počíta **na trimester** (4 mesiace) — to je školský takt programu. Mesačná
+suma pre donora je ročná suma (3 × trimester) rozdelená na 12 mesiacov. Zmluva s donorom
+je na neurčito s mesačnou výpovednou lehotou; minimálna dĺžka podpory neexistuje.
 
 Podstatné pre návrh: nejde o anonymný fundraising, ale o **dlhodobý vzťah 1:1** medzi
 donorom a dieťaťom, ktorý musí byť roky udržiavaný dôkazmi (vysvedčenia, fotky, platby).
@@ -94,9 +95,7 @@ trimester?“, „ktoré deti sú pokryté zmluvou, ale nezaplatené?“.
 
 **P7 — Osobné údaje detí v neriadených kanáloch.** Ide o mimoriadne citlivú kategóriu:
 deti, siroty, utečenci, sociálna situácia rodiny, fotografie. Dnes putujú cez WhatsApp a
-osobné mailboxy, súhlasy existujú na papieri a nie sú nijako spárované s údajmi, ktoré
-pokrývajú. Zverejnenie fotky dieťaťa bez dohľadateľného súhlasu je reálne riziko, nie
-teoretické.
+osobné mailboxy.
 
 **P8 — Donor je po podpise v tme.** Vysvedčenia a fotky chodia ad hoc, ak na ne niekto
 myslí. Pri podpore, ktorá má trvať roky, je to priamy dôvod na odchod donora — a odchod
@@ -116,8 +115,8 @@ na dieťa.
 
 Kľúčový princíp z `Štruktúra webu.docx`, ktorý treba zachovať: **škola nikdy nepíše priamo
 do produkčných dát.** Medzi podkladom od školy a databázou je vždy schvaľovací krok ADRA,
-ktorý je nielen kontrolou, ale aj editorskou prácou — preklad z angličtiny, preformulovanie
-príbehu pre slovenského čitateľa, redakcia toho, čo sa smie zverejniť.
+ktorý je nielen kontrolou, ale aj editorskou prácou — preformulovanie príbehu, úprava fotiek,
+kontrola vysvedčení, redakcia toho, čo sa smie zverejniť.
 
 Verejnú prezentáciu systém nepreberá — zostáva na existujúcom WordPresse (viď R1 v časti 11).
 
@@ -140,13 +139,14 @@ Import z existujúcich Excelov ──┘                                        
 
 | Aktér | Čo robí | Čo vidí |
 |---|---|---|
-| **Opatrovník** (rodič, príbuzný, ústav) | prihlási dieťa, podpíše súhlasy a zmluvu so školou | nič v systéme — vstupuje cez školu |
-| **Škola** | zadáva podklady o deťoch, nahráva fotky a vysvedčenia po trimestroch | svoje deti, prehľad registrovaných a sponzorovaných, sumy za trimester — **bez** údajov o donorovi |
-| **ADRA — koordinátor/admin** | schvaľuje a edituje podklady, publikuje profily, generuje zmluvy, eviduje platby, komunikuje s donorom | všetko |
-| **Donor** | vyplní sponzorský formulár, podpíše zmluvu, platí | svoje dieťa: údaje, príbeh, fotky, vysvedčenia, vlastné platby |
+| **Opatrovník** (rodič, príbuzný, ústav) | prihlási dieťa, podpíše zmluvu so školou | nič v systéme — vstupuje cez školu |
+| **Škola** | zadáva podklady o deťoch, nahráva fotky a vysvedčenia po trimestroch | svojich aktuálnych žiakov, históriu trimestrov (read-only) a aktuálny otvorený trimester: ktoré deti majú donora a koľko za ne dostane — **bez** údajov o donorovi a jeho platbách |
+| **ADRA — pracovník** | pozýva školy, spravuje ich bankové spojenie, schvaľuje a edituje podklady a reporty (príbehy, fotky, vysvedčenia), exportuje profily, generuje zmluvy, schvaľuje donora po obdržaní zmluvy, otvára trimestre, eviduje platby, komunikuje s donorom | všetko |
+| **ADRA — admin** | všetko, čo pracovník, a navyše spravuje používateľské účty | všetko |
+| **Donor** | vyplní sponzorský formulár, podpíše zmluvu, platí | svoje deti: údaje, príbeh, fotky, vysvedčenia, vlastné platby |
 
-Nie každý aktér je používateľ systému. Opatrovník ním nebude nikdy; škola v Ugande je
-používateľ s obmedzenou konektivitou a pravdepodobne na mobile.
+Nie každý aktér je používateľ systému. Opatrovník ním nebude nikdy. Pri školách
+nepredpokladáme obmedzenia konektivity ani zariadení — bežný je mobil aj počítač.
 
 ---
 
@@ -156,7 +156,7 @@ Zoradené podľa toho, ako dôležité sú pre pochopenie, nie podľa implement�
 
 **Dieťa** — jadro celej domény. Nesie osobné údaje, rodinnú a sociálnu situáciu, podmienky
 a prostredie bývania, pôvod (miestny / utečenec + krajina), príbeh, potrebný typ podpory,
-fotografie, súhlasy a stav v procese. Rozsah polí definuje `Formulár dieťaťa.docx` a je
+fotografie a stav v procese. Rozsah polí definuje `Formulár dieťaťa.docx` a je
 výrazne širší než to, čo sa zverejňuje na webe — väčšina slúži na posúdenie oprávnenosti,
 nie na prezentáciu.
 
@@ -165,7 +165,7 @@ má vlastný životný cyklus (odoslaný → vrátený na doplnenie → schvále
 z neho stane alebo sa doňho zapíše záznam dieťaťa. Oddelenie je podstatné: vďaka nemu môže
 škola zadávať bez rizika a ADRA má auditovateľné „čo prišlo vs. čo sme z toho urobili“.
 
-**Verejný profil** — redigovaná a preložená verzia dieťaťa určená na zverejnenie: príbeh
+**Verejný profil** — redigovaná verzia dieťaťa určená na zverejnenie: príbeh
 pre web, vybrané fotky, zobrazená mesačná suma. Nie stránka, ktorú by prevádzkoval tento
 systém, ale **export do WordPressu** (viď R1). Verejný web nikdy nečíta interný záznam a
 export neobsahuje presnú adresu ani plné meno opatrovníka.
@@ -176,72 +176,121 @@ profil vygeneruje znovu a prepíše — a **stav dostupnosti dieťaťa nesmie ž
 Tam patrí len text, fotky a odkaz; či dieťa ešte hľadá podporu, rozhoduje systém v momente,
 keď donor na odkaz klikne.
 
-**Opatrovník / domácnosť** — vzťah k dieťaťu, podpisovateľ súhlasov. Dôležité: z jednej
-domácnosti môže byť v programe viac detí, takže profil rodiny a jej situácia sa zdieľajú.
+**Opatrovník** — vzťah k dieťaťu, podpisuje zmluvu so školou.
+
+**Súrodenci** — len prepojenie detí, nie spoločný profil rodiny. Každé dieťa má vlastný
+formulár a vlastné údaje o domácnosti; formulár sa dá skopírovať pre súrodenca a upraviť
+len to, čo sa líši. Ponúka sa vždy jednotlivé dieťa; pri dieťati je vidieť jeho súrodencov
+a donor ich môže jedným krokom rezervovať všetkých voľných — vznikne ale samostatná
+rezervácia, sponzorstvo a zmluva pre každé dieťa.
 
 **Škola** — názov, adresa, príbeh a fotky (má vlastnú prezentáciu na webe), kontaktná
-osoba, bankové spojenie, zmluva s ADRA, ponúkané programy.
+osoba, bankové spojenie, zmluva s ADRA, ponúkané programy. Školu do systému **pozýva
+ADRA**; verejná registrácia škôl neexistuje. Bankové spojenie mení **len ADRA**: škola
+o zmenu požiada iným kanálom mimo systému, ADRA ju v systéme zapíše a doloží dodatkom
+k zmluve; zmena sa zapíše do histórie.
+
+Škola má **aktuálnych žiakov** a **históriu trimestrov** — v každom trimestri deti, za
+ktoré bola alebo nebola zaplatená. Keď dieťa prestúpi do inej školy, systém to zaznamená:
+dieťa (kód, príbeh, sponzorstvo) zostáva jedno, v novej škole je aktuálnym žiakom a
+v histórii starej školy naň zostáva odkaz, len už u nej nie je.
 
 **Program podpory** — kombinácia školy a rozsahu (len strava / školné / školné + strava /
-+ internát) s cenou za trimester. Musí byť verzionovaný v čase: ceny sa menia, ale
-existujúce sponzorstvá držia sumu, s ktorou bola podpísaná zmluva.
++ internát) s cenou za trimester, ktorú ADRA platí škole. Cenník mení ADRA; zmena platí
+pre nové sponzorstvá.
 
-**Trimester** — kalendárna os systému. Viažu sa na ňu platby, vysvedčenia, prehľady aj
-minimálna dĺžka podpory. Ugandský školský rok má tri trimestre; treba potvrdiť, či sú pre
-obe školy rovnaké.
+**Trimester** — os, na ktorú sa viažu platby školám, vysvedčenia a prehľady pre školu.
+Nemá kalendárne dátumy: trimester **explicitne otvára pracovník ADRA** a označí ho
+unikátnym `ROK/mesiac` (napr. `2026/09`) a rovnako explicitne ho aj **uzatvára**; otvorený
+je najviac jeden naraz. Pri uzavretí systém upozorní školy na chýbajúce vysvedčenia a fotky.
+Otvorením systém pre každú školu zmrazí zoznam
+jej žiakov, ktorí majú v tom momente **aktívne sponzorstvo** (schválenú zmluvu) —
+rezervácia ani nahratá zmluva nestačí. ADRA tým potvrdzuje, že za ne škole zaplatí. Zoznam sa dá po
+otvorení opraviť, oprava sa zapíše do histórie.
 
-**Donor** — kontaktné a fakturačné údaje, jazyk, komunikačné preferencie.
+**Donor** — kontaktné a fakturačné údaje, komunikačné preferencie. Má vlastný účet
+s heslom; účet sa založí pri sponzorskom formulári a sprístupní deti po tom, čo ADRA
+schváli zmluvu.
 
 **Rezervácia** (záujem o dieťa) — vzniká vyplnením sponzorského formulára, ktorý už beží
-v systéme (donor sa doňho dostane odkazom z WordPressu), a dieťa **časovo obmedzene
-blokuje**, kým sa nepodpíše zmluva. Po expirácii sa dieťa vracia do ponuky. Toto je priama
-odpoveď na P4 a v dokumentoch je naznačené ako „zablokovanie dieťaťa na webe“.
+v systéme (donor sa doňho dostane odkazom z WordPressu), a dieťa blokuje **7 kalendárnych
+dní**. Zmluvu ADRA–donor systém vygeneruje okamžite pri vzniku rezervácie, bez zásahu
+pracovníka ADRA, aby celá lehota patrila donorovi. Keď donor v lehote nahrá podpísanú zmluvu, lehota sa zastaví a zrušiť rezerváciu
+môže už len ADRA alebo donor zrušením zmluvy. Ak ADRA nahratú zmluvu neposúdi do 3 dní,
+systém ju upozorní; dieťa sa automaticky neuvoľní. Ak ADRA nahratú zmluvu odmietne, dieťa sa
+uvoľní. Po expirácii aj po odmietnutí sa dieťa vracia do ponuky a donor dostane e-mail. Toto je priama odpoveď na P4.
 
-**Sponzorstvo** — centrálna entita systému: vzťah donor ↔ dieťa ↔ program, s dátumom
-začiatku, dĺžkou v trimestroch, dohodnutou sumou a stavom (čaká na podpis / aktívne /
-pozastavené / ukončené). Všetky financie, dokumenty a reporty visia na ňom.
+**Sponzorstvo** — centrálna entita systému: vzťah donor ↔ dieťa, striktne 1:1 (donor môže
+mať viac detí, dieťa najviac jedného donora). Nesie mesačnú sumu donora, splátkový
+kalendár a stav. Je na neurčito s mesačnou výpovednou lehotou. Pri prestupe dieťaťa do
+inej školy pokračuje.
+
+**Splátkový kalendár** — rozpis očakávaných platieb donora podľa zvolenej periodicity
+(mesačne / štvrťročne / polročne / ročne), počítaný **od schválenia zmluvy**. Mení sa
+dodatkom (zmena sumy alebo periodicity).
 
 **Zmluva** — dokument vygenerovaný zo šablóny, s vlastným stavom a uloženým PDF. Tri typy:
-ADRA–donor, ADRA–škola, škola–opatrovník.
+ADRA–donor, ADRA–škola, škola–opatrovník. Zmluvy podporujú **dodatky** (zmena sumy donora,
+zmena bankového spojenia školy). Jazyk je vecou šablóny.
 
-**Potvrdenie platby od donora** a **platba škole** — dva oddelené toky, viazané na
-sponzorstvo a trimester; ADRA stojí medzi nimi a nesie riziko rozdielu. Systém ale nie je
-účtovníctvo (viď R2): nedrží sumy z bankového výpisu, len prevádzkový fakt „sponzorstvo ×
-trimester = zaplatené / nezaplatené, potvrdil ten a ten vtedy a vtedy“.
+**Potvrdenie platby od donora** a **platba škole** — dva úplne oddelené toky; ADRA stojí
+medzi nimi a nesie riziko rozdielu. Systém nie je účtovníctvo (viď R2):
+- Platby donora eviduje pracovník ADRA **po mesiacoch** (aj viac mesiacov vopred naraz).
+  Očakávané platby vychádzajú zo splátkového kalendára; 7 dní po splatnosti bez
+  potvrdenia systém ADRA upozorní a ponúkne e-mail donorovi zo šablóny. Upozornenie teda
+  príde aj vtedy, keď donor nezaplatí ani prvú platbu.
+- Platby školám idú podľa zoznamu otvoreného trimestra. Škola nikdy nevidí, či donor
+  platí — vidí len, či dieťa má na aktuálny trimester donora.
+
+**Dve ceny pri dieťati** — cena programu za trimester (čo ADRA platí škole a čo sa
+zobrazuje v ponuke) a mesačná suma donora zo zmluvy. **Nemusia si zodpovedať**: mesačná
+suma sa mení len dodatkom, keď sa tak ADRA rozhodne, a kde donor platí menej, ADRA
+dopláca. Systém rozdiel ukazuje ADRA, nepovažuje ho za chybu.
 
 **Report o dieťati** — vysvedčenie, hodnotenie, priebežné fotky za trimester; to, čo
-udržiava donora v programe.
-
-**Súhlas** — typ (spracovanie údajov, zverejnenie príbehu a fotiek, poskytovanie výsledkov
-donorovi), dátum, sken podpisu, platnosť. Nie poznámka v poli — samostatná entita, na ktorú
-sa systém pri publikovaní pozerá.
+udržiava donora v programe. Nahráva ho škola, ADRA ho môže upraviť a **musí ho schváliť**,
+až potom ho vidí donor.
 
 ---
 
 ## 7. Životné cykly
 
+**Podklad zo školy**
+
+```
+odoslaný ──▶ vo spracovaní ADRA ──▶ schválený (vznikne / aktualizuje sa záznam dieťaťa)
+   ▲                 │
+   └── vrátený na ◀──┘
+       doplnenie
+```
+
 **Dieťa**
 
 ```
-podklad odoslaný školou
-   └─▶ vo spracovaní ADRA ──(vrátené na doplnenie)──┐
-           └─▶ schválené (v internej databáze)      │
-                  └─▶ zverejnené — hľadá podporu ◀──┘
-                         └─▶ rezervované (donor vyplnil formulár)
-                                └─▶ podporované
-                                       ├─▶ pozastavené
-                                       └─▶ ukončené (dokončilo stupeň / odišlo)
+schválené (v internej databáze)
+   └─▶ zverejnené — hľadá podporu
+          └─▶ rezervované (donor vyplnil formulár)
+                 └─▶ podporované
+                        └─▶ ukončené (dokončilo stupeň / odišlo)
 ```
 
-Návratová hrana, ktorá bolí najviac: **podporované → hľadá podporu**, keď donor prestane
-platiť v rozbehnutom školskom roku. Škola už s peniazmi počítala. Systém to musí vedieť
-zachytiť včas a nie až pri trimestrálnom účtovaní.
+Návratová hrana **podporované → hľadá podporu** nastane, len keď o tom rozhodne ADRA
+(napr. donor prestal platiť). Škola sa to dozvie až pri otvorení ďalšieho trimestra; už
+otvorený trimester zostáva pre ňu zaplatený a rozdiel rieši ADRA.
+
+Keď dieťa z programu odíde alebo dokončí stupeň, systém upozorní donora a navrhne mu iné
+deti z ponuky.
+
+**Prestup do inej školy:** systém prestup zaznamená; dieťa zostáva jedno s rovnakým kódom
+a sponzorstvom, história starej školy naň ďalej odkazuje (viď Škola). ADRA sa rozhodne, či
+donorovi ponechá pôvodnú sumu, alebo mu navrhne dodatok.
 
 **Sponzorstvo**
 
 ```
-žiadosť → zmluva vygenerovaná → podpísaná → aktívne ⇄ obnovené (ďalší trimester/rok)
-                                                    └─▶ ukončené
+rezervácia → zmluva vygenerovaná → podpísaná a nahratá → schválená ADRA → aktívne
+                                                                            ├─▶ zmenené dodatkom
+                                                                            └─▶ ukončené
 ```
 
 ---
@@ -250,47 +299,39 @@ zachytiť včas a nie až pri trimestrálnom účtovaní.
 
 Sú to tie miesta, kde dnes chyba vzniká najčastejšie:
 
-1. Profil dieťaťa sa **nesmie** zverejniť bez dohľadateľného súhlasu opatrovníka so
-   zverejnením príbehu a fotografií.
+1. Súhlasy opatrovníka systém **neeviduje ani nekontroluje**. Sú súčasťou zmluvy
+   škola–opatrovník a zodpovednosť za ne, vrátane odvolania, nesie výhradne ADRA.
 2. Dieťa môže mať v danom momente najviac jednu aktívnu rezerváciu.
 3. Zmluva sa generuje výhradne zo schválených dát, nikdy zo surového podkladu školy.
-4. Suma v zmluve je suma programu platná v čase podpisu a nemení sa zmenou cenníka.
-5. Škola vidí sumy za trimester, ktoré jej ADRA platí — nevidí identitu ani platby donora.
-6. Trimester musí byť pre školu pokrytý za všetky aktívne sponzorstvá, aj keď donor ešte
-   nezaplatil; systém má tento rozdiel zviditeľniť, nie ho skryť.
+4. Suma donora v zmluve sa nemení zmenou cenníka — len dodatkom k zmluve.
+5. Škola vidí len minulé trimestre (read-only) a aktuálny otvorený trimester: ktoré deti
+   majú donora a koľko za ne dostane. Nevidí identitu donora ani to, či platí.
+6. Otvorený trimester je pre školu zaplatený za všetky deti v jeho zozname, aj keď donor
+   medzitým prestane platiť. Rozdiel vidí len ADRA. Dieťa, ktoré získa donora po otvorení,
+   sa započíta od ďalšieho trimestra.
 7. Export pre WordPress nikdy neobsahuje presnú adresu dieťaťa ani plné meno opatrovníka.
 8. Stav dostupnosti dieťaťa (hľadá podporu / rezervované / podporované) žije **výhradne
    v systéme**. WordPress ho nedrží ani nemení; rezerváciu potvrdzuje systém.
 9. Systém nevydáva účtovné doklady a jeho finančné prehľady sú prevádzkové. Pri rozpore
    vyhráva účtovníctvo ADRA.
-10. Zmena bankového spojenia školy vyžaduje potvrdenie druhou osobou a zapíše sa do auditu
-    (viď časť 9). Platba sa nikdy neodošle podľa údaja, ktorý sa zmenil bez potvrdenia.
+10. Bankové spojenie školy mení len ADRA, škola nie. Zmena sa zapíše do histórie (kto,
+    kedy, z čoho na čo). Platby posiela ADRA ručne mimo systému.
+11. Report o dieťati (vysvedčenie, fotky) vidí donor až po schválení ADRA.
 
 ---
 
 ## 9. Bezpečnosť a spoľahlivosť
 
-Toto nie sú „technické detaily na neskôr“ — obe požiadavky menia, ako sa systém navrhne,
-a jedna z nich je čiastočne procesná, nie programátorská.
+Toto nie sú „technické detaily na neskôr“ — menia, ako sa systém navrhne.
 
-### 9.1 Čo je vlastne cenný cieľ
+### 9.1 Čo chránime
 
-Intuitívne sa zdá, že najcennejšie sú osobné údaje detí. Vážnejší cieľ je ale **bankové
-spojenie školy**: je to jediné miesto, kde zmena jedného poľa presmeruje reálne peniaze.
-Ide o presne ten istý vzorec ako podvody s prepísanými faktúrami, a v praxi naň nestačí
-„mať dobre zabezpečený systém“ — útočník ho často ani nemusí hacknúť, stačí mu poslať
-presvedčivý email a nechať údaj prepísať oprávneného používateľa.
+**Bankové spojenie školy** mení len ADRA na žiadosť školy doručenú mimo systému a zmena
+je doložená dodatkom k zmluve. Systém peniaze neposiela — platbu robí pracovník ADRA ručne
+vo svojej banke. Systému stačí zmenu zapísať do histórie; história citlivých polí je
+**append-only**.
 
-Preto platí:
-
-- Bankové spojenie školy je **zmenovo riadené pole**: každá zmena sa zapíše do auditu
-  (kto, kedy, z čoho na čo) a vyžaduje potvrdenie druhou osobou z ADRA.
-- Škola si bankové spojenie **nemení sama**. Mení ho ADRA po overení mimo systému —
-  telefonátom na už známy kontakt, nie na číslo z emailu, ktorý o zmenu žiada.
-- Pri zmene dostane notifikáciu aj druhý človek v ADRA, aby tichá zmena nebola možná.
-- Audit citlivých polí je **append-only** — nedá sa prepísať ani zmazať z aplikácie.
-
-Druhá kategória je osobné údaje detí: príbehy, sociálna situácia, fotografie. Tu je
+Hlavná kategória sú osobné údaje detí: príbehy, sociálna situácia, fotografie. Tu je
 najlepšou ochranou to, čo systém vôbec nemá — a z rozhodnutia R2 vyplýva príjemná vec:
 **systém nikdy nedrží platobné údaje donorov** (čísla kariet, prístup k účtom), lebo platby
 prechádzajú mimo neho. To odrezáva celú jednu kategóriu rizika.
@@ -309,14 +350,13 @@ prechádzajú mimo neho. To odrezáva celú jednu kategóriu rizika.
 - Prílohy od škôl (fotky, PDF vysvedčení) sú klasický vstup pre útok: validovať typ, nikdy
   neukladať do priestoru, odkiaľ sa dá súbor spustiť.
 - Prístupy podľa role, ktoré už časť 5 definuje, musia byť vynútené na serveri, nie len
-  skryté v UI. Škola vidí svoje deti, donor svoje dieťa, nič viac.
-- Admin prístup ADRA s dvojfaktorovým overením.
+  skryté v UI. Škola vidí svoje deti, donor svoje deti, nič viac.
+- Prístup ADRA (admin aj pracovník) s dvojfaktorovým overením.
 - **Žiadne produkčné dáta v testovacom prostredí** a žiadne exporty do osobných zariadení
   či WhatsAppu — dnešný kanál je zároveň dnešný únik.
 
-Poznámka k zadaniu: `Štruktúra webu.docx` počíta s prístupom donora „cez heslo“ ku karte
-dieťaťa. Spoločné či zdieľané heslo na profil je slabý vzor — časom sa rozšíri a nikdy sa
-nemení. Lepšie je buď riadny účet donora, alebo podpísaný odkaz s expiráciou.
+Prístup donora „cez heslo“ zo `Štruktúra webu.docx` je riešený vlastným účtom donora
+s heslom, nie zdieľaným heslom na profil.
 
 ### 9.3 Spoľahlivosť: dáta sa nesmú stratiť
 
@@ -329,8 +369,8 @@ je dobrá správa, pretože trvácnosť je výrazne lacnejšia.
 Z toho konkrétne:
 
 - **Hotové zálohovanie od poskytovateľa databázy** je postačujúce a žiaduce — nemá zmysel
-  písať vlastné skripty. Podmienka je automatické zálohovanie s obnovou do bodu v čase
-  a obnova na niekoľko kliknutí, nie ručný postup.
+  písať vlastné skripty. Stačí denná automatická záloha (strata jedného dňa je
+  akceptovateľná) a obnova na niekoľko kliknutí, nie ručný postup.
 - **Záloha zahŕňa aj súbory, nie len databázu.** Fotky, vysvedčenia a PDF zmlúv sú rovnako
   dôležité ako záznamy. Samotný dump databázy by po obnove ukazoval na neexistujúce
   fotografie — a PDF zmlúv sú právne dokumenty.
@@ -338,8 +378,8 @@ Z toho konkrétne:
   nie záloha.
 - **Kópia zálohy mimo hostingu, vo vlastníctve ADRA.** Ak sa stratí hosting kvôli zrušenému
   účtu, nezaplatenej faktúre alebo zaniknutému dodávateľovi, zmiznú s ním aj zálohy, ktoré
-  ležia v tom istom účte. Pre organizáciu, ktorá systém neprevádzkuje sama, je toto
-  pravdepodobnejší scenár než útok.
+  ležia v tom istom účte. Pre malú organizáciu bez vlastného IT je toto pravdepodobnejší
+  scenár než útok.
 
 ### 9.4 Prenositeľnosť: strata hostingu nesmie byť koniec
 
@@ -377,8 +417,8 @@ od tretej strany“:
    je len ďalší zdroj **podkladov** a môže ísť do tej istej schvaľovacej fronty ako formulár
    školy. Zároveň je to náhradný vstup, kým školy formulár nepoužívajú.
 5. **Štruktúrovaný formulár pre školy** — najväčší dlhodobý efekt, ale najrizikovejší krok:
-   vyžaduje zmenu správania ľudí v Ugande, slabé pripojenie, prácu na mobile. Systém musí
-   uniesť aj to, že podklad doňho zadá pracovník ADRA namiesto školy.
+   vyžaduje zmenu správania ľudí v Ugande. Systém musí uniesť aj to, že podklad doňho zadá
+   pracovník ADRA namiesto školy.
 6. **Donorský portál** (vysvedčenia, fotky, platby) — nie úspora práce, ale retencia
    donorov, teda stabilita financovania.
 7. **Trimestrálne prevádzkové prehľady** — nad potvrdeniami platieb, ktoré zadáva pracovník
@@ -401,11 +441,12 @@ nie súčasť zadania.
 formulár vedel, o koho ide.
 
 **R2 — Zdrojom pravdy o peniazoch zostáva účtovníctvo ADRA.**
-Systém platby neúčtuje. Pracovník ADRA v admin rozhraní len zaznačí, že platba za daný
-trimester prišla.
+Systém platby neúčtuje. Pracovník ADRA v admin rozhraní len zaznačí, že platba donora za
+daný mesiac (alebo viac mesiacov) prišla.
 *Dôsledky:* žiadna banková integrácia ani automatické párovanie; systém drží len stav
-„zaplatené / nezaplatené“ na sponzorstvo a trimester, z ktorého stavia prevádzkové prehľady;
-tieto prehľady nie sú účtovný výstup (invariant 9).
+„zaplatené / nezaplatené“ na sponzorstvo a mesiac, z ktorého stavia prevádzkové prehľady;
+tieto prehľady nie sú účtovný výstup (invariant 9). Potvrdenia o dare na daňové účely sú
+mimo systému.
 
 **R3 — Import z existujúcich Excelov je súčasť zadania.**
 Nie len jednorazová migrácia, ale aj priebežný vstupný kanál. Detaily aktuálneho formátu
@@ -414,43 +455,20 @@ budú dodané neskôr.
 rovnakým schvaľovaním; musí byť tolerantný k nekonzistentným dátam a umožniť mapovanie
 stĺpcov, keď sa formát tabuliek zmení.
 
+**R4 — Jazyk.** Systém je pripravený na viac jazykov; prvá verzia je len v angličtine,
+slovenčina sa doplní neskôr. Príbeh pre WordPress prekladá pracovník ADRA. Jazyk zmlúv
+určuje šablóna.
+
+**R5 — Osobné údaje.** Prevádzkovateľom osobných údajov je ADRA. Systém nič automaticky
+nemaže ani neanonymizuje. Súhlasy opatrovníka systém nerieši (invariant 1).
+
+**R6 — Štart.** Systém začína od nového trimestra; read-only import historických dát je
+nice-to-have. Reálne dáta sa do systému vložia až pri odovzdaní.
+
 ---
 
 ## 12. Otvorené otázky
 
-Dátový model:
-- Môže mať dieťa viac donorov naraz (jeden platí stravu, druhý školné), alebo je vzťah
-  striktne 1:1?
-- Kto prideľuje kód dieťaťa (`UGA 127`) a je stabilný na celý čas programu?
-- Čo sa deje pri prestupe dieťaťa na vyšší stupeň alebo do inej školy — mení sa program,
-  cena, a teda aj zmluva?
-- Sú trimestre pre obe školy totožné?
-
-Proces:
-- Aká je lehota a postup, keď donor prestane platiť — kto a kedy informuje školu?
-- Kto prekladá príbeh dieťaťa do slovenčiny a má byť web dvojjazyčný (SK/EN)?
-- **Kto a ako upraví profil vo WordPresse**, keď dieťa získa podporu alebo keď opatrovník
-  odvolá súhlas so zverejnením? Export je jednosmerný, takže zásah do WordPressu zostáva
-  ručný — systém vie k tomu maximálne vygenerovať zoznam „na úpravu“. Pri odvolanom súhlase
-  je to právne riziko, nie kozmetika, takže tento krok potrebuje jasného vlastníka.
-
-Právne a bezpečnostné:
-- Kto je prevádzkovateľ osobných údajov — ADRA, škola, alebo obe spoločne? Existuje
-  zmluvné ošetrenie prenosu údajov z Ugandy do EU?
-- Súhlasy: papier + sken, alebo digitálny podpis?
-- Ako dlho sa uchovávajú údaje a fotky po ukončení podpory?
-
-Bezpečnosť a prevádzka:
-- **Kto v ADRA smie meniť bankové spojenie školy a kto je tá „druhá osoba“, ktorá zmenu
-  potvrdzuje?** Bez menovaných ľudí je invariant 10 len text.
-- Koľko ľudí má mať admin prístup a čo sa stane, keď taký človek z ADRA odíde? Kto potom
-  drží prístup k hostingu a zálohám?
-- Aká strata dát je ešte akceptovateľná — deň zadávania, hodina? Od toho závisí, či stačí
-  denná záloha alebo treba obnovu do bodu v čase.
 - Kde bude uložená kópia zálohy mimo hostingu a na koho účet v ADRA je vedená?
-- Aký je režim prístupu donora — riadny účet, alebo odkaz s expiráciou? (`Štruktúra
-  webu.docx` hovorí o „prístupe cez heslo“.)
-- Prevádzkuje systém ADRA sama, alebo externý dodávateľ? Kto reálne obnoví systém po havárii?
-- Aká je reálna konektivita a zariadenia na školách?
-- Beží popri importe z Excelu aj dobeh starých dát, alebo sa historické sponzorstvá
-  dosledujú po starom a systém začne od aktuálneho školského roka?
+- Šablóny troch zmlúv a vzorky Excelov — ADRA ich dodá.
+- Cenník za trimester — zadá ADRA v systéme, nie je blokujúci.
