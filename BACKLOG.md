@@ -156,7 +156,7 @@ na viacerých miestach.
 
 ### 1.3 Záznam školy a programov
 
-- Škola: názov, adresa, popis situácie, kontaktná osoba, bankové spojenie, ponúkané programy
+- Škola: názov, sídlo a korešpondenčná adresa, popis situácie, kontaktná osoba, bankové spojenie, ponúkané programy
 - Program podpory = škola + rozsah (len strava / školné / školné + strava / + internát)
   s cenou za trimester v eurách
 - Mesačná suma programu je vždy 3 × aktuálna cena za trimester / 12; zmenou ceny za
@@ -199,12 +199,19 @@ na viacerých miestach.
 
 Základ pre zmluvy (epik 2) aj platby (epik 6).
 
-- Darca: kontaktné a fakturačné údaje, účet s heslom
+- Darca: kontaktné a fakturačné údaje, adresa trvalého pobytu (u firmy sídlo)
+  a korešpondenčná adresa, účet s heslom
 - Sponzorstvo darca ↔ dieťa, striktne 1:1 — dieťa má najviac jedného darcu, darca môže mať
   viac detí [test]
 - Sponzorstvo nesie mesačnú sumu, periodicitu splácania (mesačne / štvrťročne / polročne /
   ročne) a stav (čaká na schválenie → aktívne → ukončené)
 - Splátkový kalendár sa počíta od schválenia zmluvy [test]
+
+### 1.10 Údaje ADRA
+
+- Názov, IČO, štatutárny zástupca, sídlo, korešpondenčná adresa, IBAN, kontakt; spravuje
+  ich ADRA v systéme a šablóny zmlúv ich preberajú odtiaľ, nie sú v nich natvrdo
+- Zmena sa zapíše do histórie a nemení už vygenerované zmluvy [test]
 
 ---
 
@@ -338,9 +345,13 @@ oddelené toky.
 
 - 6.1 Trimester otvára explicitne pracovník ADRA a označí ho `ROK/mesiac`; označenie je
   unikátne [test]
-- 6.2 Otvorením sa pre každú školu zmrazí zoznam jej žiakov s aktívnym sponzorstvom
-  (schválenou zmluvou) — rezervácia ani nahratá zmluva nestačí. Za tieto deti ADRA škole
-  zaplatí celý trimester *(invariant 6)* [test]
+- 6.2 Trimester v príprave: systém pre každú školu navrhne zoznam jej žiakov s aktívnym
+  sponzorstvom (schválenou zmluvou) — rezervácia ani nahratá zmluva nestačí [test].
+  Otvorením sa zoznam zmrazí a za deti v ňom ADRA škole zaplatí celý trimester
+  *(invariant 6)* [test]
+- 6.2a Pred otvorením môže pracovník ADRA dieťa s darcom zo zoznamu vyradiť a pridať
+  dieťa bez darcu, ktoré financuje ADRA. Pri každom dieťati v trimestri je vidieť, či je
+  kryté darcom alebo ADRA; škola to nevidí [test]
 - 6.3 Zoznam otvoreného trimestra sa dá opraviť; oprava sa zapíše do histórie
 - 6.4 Dieťa, ktoré získa darcu po otvorení trimestra, sa započíta od ďalšieho [test]
 - 6.5 Trimester explicitne uzatvára pracovník ADRA. Otvorený je najviac jeden trimester

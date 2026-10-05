@@ -206,7 +206,13 @@ Zdroj: 1.1 · Závisí od: HK-06, HK-11
 
 ### HK-12 · Záznam školy
 Zdroj: 1.3 · Závisí od: HK-06
-- Názov, adresa, popis situácie, kontaktná osoba, ponúkané programy
+- Názov, sídlo a korešpondenčná adresa, popis situácie, kontaktná osoba, ponúkané programy
+
+### HK-12A · Údaje ADRA
+Zdroj: 1.10 · Závisí od: HK-06, HK-09
+- Názov, IČO, štatutárny zástupca, sídlo, korešpondenčná adresa, IBAN, kontakt; šablóny
+  zmlúv ich preberajú odtiaľ
+- Zmena sa zapíše do histórie a nemení už vygenerované zmluvy [test]
 
 ### HK-13 · Programy podpory a cenník
 Zdroj: 1.3 · Závisí od: HK-12
@@ -257,7 +263,8 @@ Zdroj: 1.7 · Závisí od: HK-16
 
 ### HK-20 · Darca
 Zdroj: 1.9 · Závisí od: HK-06
-- Kontaktné a fakturačné údaje, účet s heslom
+- Kontaktné a fakturačné údaje, adresa trvalého pobytu (u firmy sídlo) a korešpondenčná
+  adresa, účet s heslom
 - Darca vidí výhradne deti s aktívnym sponzorstvom; po ukončení sponzorstva stráca prístup
   ku karte dieťaťa, vlastné platby vidí ďalej [test] *(predpoklad PO)*
 
@@ -440,10 +447,15 @@ Zdroj: 5.8 · Závisí od: HK-41
 ## Oblasť 7 — Trimestre, platby, prehľady (Epik 6)
 
 ### HK-45 · Otvorenie trimestra
-Zdroj: 6.1, 6.2, 6.4 · Závisí od: HK-21
+Zdroj: 6.1, 6.2, 6.2a, 6.4 · Závisí od: HK-21
 - Trimester otvára pracovník ADRA a označí ho `ROK/mesiac`; označenie je unikátne [test]
-- Otvorením sa pre každú školu zmrazí zoznam žiakov s aktívnym sponzorstvom; rezervácia
-  ani nahratá zmluva nestačia [test] *(invariant 6)*
+- Trimester v príprave: systém pre každú školu navrhne zoznam žiakov s aktívnym
+  sponzorstvom; rezervácia ani nahratá zmluva nestačia [test]
+- Pred otvorením môže pracovník ADRA dieťa s darcom vyradiť a pridať dieťa bez darcu,
+  ktoré financuje ADRA; pri dieťati je vidieť, či je kryté darcom alebo ADRA, škola to
+  nevidí [test]
+- Otvorením sa zoznam zmrazí; za deti v ňom ADRA škole zaplatí celý trimester [test]
+  *(invariant 6)*
 - Dieťa, ktoré získa darcu po otvorení, sa započíta až od ďalšieho trimestra [test]
 
 ### HK-45A · Uzavretie trimestra

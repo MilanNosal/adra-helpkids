@@ -176,6 +176,10 @@ profil vygeneruje znovu a prepíše — a **stav dostupnosti dieťaťa nesmie ž
 Tam patrí len text, fotky a odkaz; či dieťa ešte hľadá podporu, rozhoduje systém v momente,
 keď donor na odkaz klikne.
 
+**ADRA** — vlastné údaje, ktoré vstupujú do zmlúv: názov, IČO, štatutárny zástupca,
+sídlo, korešpondenčná adresa, IBAN, kontakt. Spravuje ich ADRA v systéme, nie sú natvrdo
+v šablónach; zmena sa zapíše do histórie a nemení už vygenerované zmluvy.
+
 **Opatrovník** — vzťah k dieťaťu, podpisuje zmluvu so školou.
 
 **Súrodenci** — len prepojenie detí, nie spoločný profil rodiny. Každé dieťa má vlastný
@@ -184,7 +188,7 @@ len to, čo sa líši. Ponúka sa vždy jednotlivé dieťa; pri dieťati je vidi
 a donor ich môže jedným krokom rezervovať všetkých voľných — vznikne ale samostatná
 rezervácia, sponzorstvo a zmluva pre každé dieťa.
 
-**Škola** — názov, adresa, príbeh a fotky (má vlastnú prezentáciu na webe), kontaktná
+**Škola** — názov, sídlo a korešpondenčná adresa, príbeh a fotky (má vlastnú prezentáciu na webe), kontaktná
 osoba, bankové spojenie, zmluva s ADRA, ponúkané programy. Školu do systému **pozýva
 ADRA**; verejná registrácia škôl neexistuje. Bankové spojenie mení **len ADRA**: škola
 o zmenu požiada iným kanálom mimo systému, ADRA ju v systéme zapíše a doloží dodatkom
@@ -203,12 +207,17 @@ pre nové sponzorstvá.
 Nemá kalendárne dátumy: trimester **explicitne otvára pracovník ADRA** a označí ho
 unikátnym `ROK/mesiac` (napr. `2026/09`) a rovnako explicitne ho aj **uzatvára**; otvorený
 je najviac jeden naraz. Pri uzavretí systém upozorní školy na chýbajúce vysvedčenia a fotky.
-Otvorením systém pre každú školu zmrazí zoznam
-jej žiakov, ktorí majú v tom momente **aktívne sponzorstvo** (schválenú zmluvu) —
-rezervácia ani nahratá zmluva nestačí. ADRA tým potvrdzuje, že za ne škole zaplatí. Zoznam sa dá po
-otvorení opraviť, oprava sa zapíše do histórie.
+Pred otvorením je trimester **v príprave**: systém pre každú školu navrhne zoznam jej
+žiakov, ktorí majú v tom momente **aktívne sponzorstvo** (schválenú zmluvu) — rezervácia
+ani nahratá zmluva nestačí. Zoznam je len návrh, rozhoduje oň pracovník ADRA: môže
+dieťa s donorom **vyradiť** (napr. vie, že donor zaplatí už len mesiac a trimester
+nepokryje) a môže **pridať** dieťa bez donora, ktoré ADRA financuje z vlastných zdrojov.
+Otvorením sa zoznam zmrazí a ADRA tým potvrdzuje, že za tieto deti škole zaplatí. Zoznam sa
+dá po otvorení opraviť, oprava sa zapíše do histórie. Či je dieťa v trimestri kryté
+donorom alebo ADRA, vidí len ADRA; škola vidí len, že dieťa je na trimester zaplatené.
 
-**Donor** — kontaktné a fakturačné údaje, komunikačné preferencie. Má vlastný účet
+**Donor** — kontaktné a fakturačné údaje, adresa trvalého pobytu (u firmy sídlo)
+a korešpondenčná adresa, komunikačné preferencie. Má vlastný účet
 s heslom; účet sa založí pri sponzorskom formulári a sprístupní deti po tom, čo ADRA
 schváli zmluvu.
 
@@ -279,7 +288,8 @@ Návratová hrana **podporované → hľadá podporu** nastane, len keď o tom r
 otvorený trimester zostáva pre ňu zaplatený a rozdiel rieši ADRA.
 
 Keď dieťa z programu odíde alebo dokončí stupeň, systém upozorní donora a navrhne mu iné
-deti z ponuky.
+deti z ponuky. Peniaze za už zaplatený trimester rodine nepatria; ADRA ich so súhlasom
+donora presunie na náhradné dieťa, v systéme opravou zoznamu otvoreného trimestra.
 
 **Prestup do inej školy:** systém prestup zaznamená; dieťa zostáva jedno s rovnakým kódom
 a sponzorstvom, história starej školy naň ďalej odkazuje (viď Škola). ADRA sa rozhodne, či
@@ -465,6 +475,11 @@ nemaže ani neanonymizuje. Súhlasy opatrovníka systém nerieši (invariant 1).
 **R6 — Štart.** Systém začína od nového trimestra; read-only import historických dát je
 nice-to-have. Reálne dáta sa do systému vložia až pri odovzdaní.
 
+**R7 — Sponzoruje sa školné, nie podiel na ňom.** Cena za dieťa je v danom čase rovnaká
+pre všetky deti v tom istom programe tej istej školy. Spolufinancovanie rodinou (zmienka
+„% for family / % for donors“ vo formulári dieťaťa) systém nerieši; vo formulári môže
+zostať ako informácia, systém z nej nič nepočíta.
+
 ---
 
 ## 12. Otvorené otázky
@@ -472,3 +487,9 @@ nice-to-have. Reálne dáta sa do systému vložia až pri odovzdaní.
 - Kde bude uložená kópia zálohy mimo hostingu a na koho účet v ADRA je vedená?
 - Šablóny troch zmlúv a vzorky Excelov — ADRA ich dodá.
 - Cenník za trimester — zadá ADRA v systéme, nie je blokujúci.
+- **Jedna zmluva pre viac detí?** Dnes ADRA uzatvára jednu darovaciu zmluvu na viac detí
+  naraz (napr. DZ 2: traja súrodenci Kahene, 3 × 20 € = 60 €/mesiac). Návrh zatiaľ počíta
+  so samostatnou zmluvou pre každé dieťa. Variant na zváženie: sponzorstvo ostáva 1:1,
+  zmluva je 1:N (deti z jednej rezervácie, jedno číslo DZ a VS, splátkový kalendár na
+  zmluve); vyradenie jedného dieťaťa rieši dodatok, pridanie dieťaťa nová zmluva.
+  Rozhodneme my, nie ADRA.
